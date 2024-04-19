@@ -16,6 +16,69 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor(){
+    this.result = 0
+  }
+
+  add(val){
+    if(typeof val == 'number'){
+    this.result += + val}
+
+    else{
+      throw new Error("Invalid Number")
+    }
+  }
+  
+  subtract(val){
+    if(typeof val == 'number'){
+      this.result -= + val
+    }
+    else{
+      throw new Error("Invalid Number")
+    }
+  }
+
+  multiply(val){
+    if(typeof val == 'number'){
+      this.result *= + val
+    }
+    else{
+      throw new Error("Invalid Number")
+    }
+  }
+
+  divide(val){
+    if(typeof val == 'number' && val != 0){
+      this.result /= val;
+    }
+    else{
+      throw new Error("Invalid Number")
+    }
+    
+  }
+
+  clear(){
+    this.result = 0;
+  }
+
+  getResult(){
+    return this.result
+  }
+
+  calculate(str){
+    this.result = eval(str.replace('/\s+/g', ' '))
+    if (this.result == Infinity){
+      throw new Error('Infinity')
+    }
+    return this.result
+  }
+}
 
 module.exports = Calculator;
+
+
+// /\s+/g denotes extra white spaces in a string 
+// just like /n denotes new line 
+// \s is a regex used for single space 
+// \s+ is a regex used for contineous spaces 

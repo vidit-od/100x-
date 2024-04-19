@@ -9,5 +9,16 @@ There is no automated test for this one, this is more for you to understand time
 */
 
 function calculateTime(n) {
-    return 0.01;
+    let total = 0;
+    let preDate = new Date
+    for(let i = 1; i<n+1; i++){
+        total += i;
+    }
+    let posDate = new Date
+
+    return (posDate.getTime() - preDate.getTime())/1000
 }
+
+console.log(` when n = 100 : ${calculateTime(100)}s`);
+console.log(` when n = 100000 : ${calculateTime(100000)}s`);
+console.log(` when n = 1000000000 : ${calculateTime(1000000000)}s`);
