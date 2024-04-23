@@ -63,30 +63,42 @@ app.post('/',function(req,res) {
 // put logic 
 app.put('/',function(req,res){
     let user_kidney_array  = user[0].kidney
+    let count = 0;
     user_kidney_array.forEach(function(element){
         if(element.health_status == false){
             element.health_status = true;
+            count++;
         }
     })
 
+    if(count == 0){
+        res.json({
+            msg: 'all kidney already healthy'
+        })
+    }
+    else{
     res.json({
         msg: 'all kidneys healed'
-    })
+    })}
 })
 
 app.delete('/',function(req,res){
     let user_kidney_array  = user[0].kidney
     let new_user_kidney_array = []
-
     user_kidney_array.forEach(function(element){
         if(element.health_status){
             new_user_kidney_array.push(element);
         }
     })
-
     user[0].kidney = new_user_kidney_array;
-
+    
+    if (new_user_kidney_array.length == user_kidney_array.length){
+        res.json({
+            msg:"all kidneys are already healthy"
+        })
+    }
+    else{
     res.json({
         msg: 'all unhealthy kidney removed'
-    })
+    })}
 })
