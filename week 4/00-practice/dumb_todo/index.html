@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <div class="background">
+        <div class="Todo">
+            <div class="title">Todo List</div>
+            <div class="Field">
+                <div class="tag">Task</div> 
+                <input type="text" name="Task" id="Task">
+            </div>
+            <div class="Field">
+                <div class="tag">Description</div> 
+                <input type="text"name="Description" id="Description">
+            </div>
+            <div class="Field button">
+                <input type="button" value="Add Todo" onclick="AddList()">
+            </div>
+        </div>
+        <div class="List">
+            <div class="header">Task List</div>
+            <div class="container">
+                <div class="task">
+                    <div class="title">Task 1</div>
+                    <div class="Desc">Description of task 1</div>
+                    <div class="btn"><input type="button" value="Mark as Done" id="1" onclick="done(1)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    let id = 1;
+    function done(id){
+        document.getElementById(id).value = 'Done!!';
+    }
+    function AddList(){
+        const title = document.getElementById('Task').value;
+        document.getElementById('Task').value = ''
+        const desc = document.getElementById('Description').value;
+        document.getElementById('Description').value = ''
+        id  = id +1 ;
+        createTask(title,desc,id);
+    }
+
+function createTask(title,desc,id){
+    let task = document.createElement('div')
+    task.setAttribute('class','task');
+    let task_title = document.createElement('div');
+    task_title.setAttribute('class','title');
+    task_title.innerHTML = title
+    let task_Desc = document.createElement('div');
+    task_Desc.setAttribute('class','Desc');
+    task_Desc.innerHTML = desc;
+    let btn = document.createElement('div')
+    btn.setAttribute('class','btn');
+    task.appendChild(task_title);
+    task.appendChild(task_Desc);
+    task.appendChild(btn);
+    let input_btn = document.createElement('input');
+    input_btn.type = 'button';
+    input_btn.id = id
+    input_btn.value = 'Mark as Done'
+    input_btn.onclick = ()=>{done(id)};
+    btn.appendChild(input_btn)
+    
+    document.querySelector('.container').appendChild(task);
+
+}
+</script>

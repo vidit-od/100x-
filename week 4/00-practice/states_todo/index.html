@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <div class="background">
+        <div class="List">
+            <div class="header">
+                <div class="title">Task List</div>
+                <div class="refresh"><input type="button" value="Sync" onclick="LoadNewState()"></div>
+            </div>
+            <div class="container">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    async function LoadNewState(){
+        const response = await fetch('http://localhost:3000/getTodoState');
+        const arr = await response.json();
+        document.querySelector('.container').innerHTML=''
+        arr.forEach(element => {
+            createTask(element.title,element.description,element.id)
+        });
+    }
+    function createTask(title,desc,id){
+    let task = document.createElement('div')
+    task.setAttribute('class','task');
+    let task_title = document.createElement('div');
+    task_title.setAttribute('class','title');
+    task_title.innerHTML = title
+    let task_Desc = document.createElement('div');
+    task_Desc.setAttribute('class','Desc');
+    task_Desc.innerHTML = desc;
+    let btn = document.createElement('div')
+    btn.setAttribute('class','btn');
+    task.appendChild(task_title);
+    task.appendChild(task_Desc);
+    task.appendChild(btn);
+    let input_btn = document.createElement('input');
+    input_btn.type = 'button';
+    input_btn.id = id
+    input_btn.value = 'Mark as Done'
+    input_btn.onclick = ()=>{done(id)};
+    btn.appendChild(input_btn)
+    
+    document.querySelector('.container').appendChild(task);
+
+}
+    function done(id){
+        document.getElementById(id).value= 'Done!!'
+    }
+</script>

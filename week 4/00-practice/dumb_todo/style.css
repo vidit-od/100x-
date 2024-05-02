@@ -1,0 +1,109 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+body{
+    font-family: "Inter", serif;
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+}
+input[type=text]{
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+input[type=text]:focus{
+    outline: none;
+    border-color: dodgerblue; 
+}
+
+.background{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+}
+.Todo,
+.List{
+    position: relative;
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: column;
+    width: 430px;
+    height: fit-content;
+    min-height: 250px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.406);
+    margin-right: 10px;
+}
+.List{
+    height: 90%;
+    margin-right: 0px;
+    margin-left: 10px;
+    overflow: hidden;
+}
+.Todo .title{
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 10%;
+    background-color: #387ed1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 5px 5px 0px 0px ;
+}
+
+.Todo .Field{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 90%;
+    min-width: 65%;
+    margin: 15px 0px 15px 0px  ;
+}
+.Todo .tag{
+    width: fit-content;
+}
+
+.Todo .button input{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 25px;
+    background-color: #387ed1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+}
+.List .task{
+    margin-top: 10px;
+    background-color: #f1f1f1;
+    width: 90%;
+    padding-left: 10%;
+}
+.List .header{
+    top: 0%;
+    width: 100%;
+    height: 10%;
+    background-color: #387ed1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.container{
+    width: 100%;
+    height: 90%;
+    overflow: scroll;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <div class="background">
+    <div class="SimpleInterestCalculator">
+        <div class="title">Simple Interest Calculator</div>
+    <div class="Field">
+        <div class="tag">Amount(INR)</div> 
+        <input type="number" oninput="DebouncedCalculator()" name="Amount" id="Amount" min="0">
+    </div>
+    <div class="Field">
+        <div class="tag">Duration(Yrs)</div> 
+        <input type="number" oninput="DebouncedCalculator()" name="duration" min="0" id="duration">
+    </div>
+    <div class="Field">
+        <div class="tag">Interest Rate(%)</div> 
+        <input type="number" oninput="DebouncedCalculator()" name="Interest" id="Interest">
+    </div>
+    <div class="Field Result">
+        <div class="tag">Expected Returns(INR) </div> 
+        <div class="ans">Nil</div>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
+
+<script>
+    let OurTimer
+    function DebouncedCalculator(){
+        
+        clearTimeout(OurTimer);
+        OurTimer = setTimeout(function() {
+            SICalculate()
+        },400);
+    }
+
+    async function SICalculate(){
+        const Amount = document.getElementById('Amount').value
+        const years = document.getElementById('duration').value
+        const Interest = document.getElementById('Interest').value
+
+        if(Amount != '' && years != '' && Interest != ''){
+        const response = await fetch(`http://localhost:3000/SimpleInterest?amt=${Amount}&yrs=${years}&intr=${Interest}`)
+
+        const ans = await response.text();
+
+        document.querySelector('.ans').innerHTML = ans;
+        }
+        else{
+            document.querySelector('.ans').innerHTML = 'Nil';
+            
+        }
+    }
+</script>
