@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+*{
+  padding: 0%;
+  margin: 0%;
+}
+body{
+  font-family: "Inter", serif;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  color: black;
+}
+input[type=text]{
+  padding: 10px;
+  text-align: center;
+  border: 2px solid #ccc;
+  background-color: white;
+  color: black;
+  transition: border-color 0.3s ease;
+}
+input[type=text]:focus{
+  outline: none;
+  border-color: dodgerblue; 
+}
+
+.background{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f1f1f1;
+  top: 0%;
+  left: 0%;
+}
+.Todo,
+.List{
+  position: relative;
+  display: flex;
+  background-color: #ffffff;
+  flex-direction: column;
+  width: 430px;
+  height: fit-content;
+  min-height: 250px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.406);
+  margin-right: 10px;
+}
+.List{
+  height: 90%;
+  margin-right: 0px;
+  margin-left: 10px;
+  overflow: hidden;
+}
+.Todo .title{
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 10%;
+  background-color: #387ed1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 5px 5px 0px 0px ;
+}
+
+.Todo .Field{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 90%;
+  min-width: 65%;
+  margin: 15px 0px 15px 0px  ;
+}
+.Todo .tag{
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  
+}
+
+.Todo .button button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25px;
+  background-color: #387ed1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+
+}
+.List .task{
+  margin-top: 10px;
+  background-color: #f1f1f1;
+  width: 90%;
+  padding-left: 10%;
+}
+.List .header{
+  top: 0%;
+  width: 100%;
+  height: 10%;
+  background-color: #387ed1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.container{
+  width: 100%;
+  height: 90%;
+  overflow-x: hidden;
+  overflow-y:scroll;
+}
+.List input[type = 'button']{
+  margin-right: 10px; 
+}
