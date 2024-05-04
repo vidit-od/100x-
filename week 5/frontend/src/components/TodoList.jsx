@@ -15,7 +15,7 @@ export function Todolist({Alltodos}){
     
     return <div>
         {Alltodos.map(function (todo){
-            return <div>
+            return <div className="todo" key={todo._id}>
                 <h1>{todo.Title}</h1>
                 <h2>{todo.Description}</h2>
                 <input type="button" onClick={(e) => {UpdateTodo(todo._id)}} value={(todo.Completed == true ? 'Done': "Mark as Done")}/>

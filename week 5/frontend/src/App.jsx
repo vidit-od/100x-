@@ -14,7 +14,7 @@ function App() {
      setTodos(json);
    })
   return (
-    <div>
+    <div className='container'>
         <AddTodo/>
         <Todolist Alltodos = {todos}/>
     </div>
