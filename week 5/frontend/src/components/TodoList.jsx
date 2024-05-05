@@ -2,12 +2,13 @@ import { useState } from "react";
 
 export function Todolist({Alltodos}){
     async function UpdateTodo(TodoId){
-        const response = await fetch(`http://localhost:3000/todos/${TodoId}`,
+        const response = await fetch(`http://localhost:3000/todos`,
         {
             method:'PUT',
             headers:{
                 "Content-Type":"application/json"
-            }
+            },
+            id: TodoId,
         })
         const msg = await response.json();
         console.log( msg);

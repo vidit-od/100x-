@@ -10,7 +10,15 @@ const TodoSchema = new mongoose.Schema({
     Completed: Boolean
 })
 
+const UserSchema = new mongoose.Schema({
+    Username: String,
+    Password: String,
+})
+
 const Todo = mongoose.model('Todo', TodoSchema)
+const User = mongoose.model('Users',UserSchema);
+
 module.exports={
-    Todo
+    Todo,
+    User,
 }

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export function AddTodo({}){
+export function AddTodo({AddHandler}){
   const [title, setTitle] = useState('');
   const [Desc, setDesc] = useState('');
   
@@ -15,6 +15,9 @@ export function AddTodo({}){
     })
      const msg = await response.json();
      console.log(msg)
+     if(typeof AddHandler === 'function'){
+      AddHandler();
+    }
   }  
   
   return (
