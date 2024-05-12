@@ -7,6 +7,7 @@ import { RecoilRoot} from 'recoil'
 import { Main } from './components/main'
 import { ParagraphGenerator } from './components/paragraph'
 import { GithubComponent } from './components/github'
+import { OTP } from './components/otp'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/background_change' element={<BackgroundChange/>}/>
           <Route path='/paragraph_generator' element={<ParagraphGenerator/>}/>
           <Route path='/github_card' element = {<GithubComponent />}/>
+          <Route path='/otp' element = {<OTP/>}/>
         </Routes>
       </BrowserRouter>
     </Main>

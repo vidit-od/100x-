@@ -10,5 +10,6 @@ export function Navbar({children}){
         <input type="button" value="Assignment 2" onClick={()=> navigate('/background_change')}/>
         <input type="button" value="Assignment 3" onClick={()=> navigate('/paragraph_generator')}/>
         <input type="button" value="Assignment 4" onClick={()=> navigate('/github_card')}/>
+        <input type="button" value="Assignment 5" onClick={()=> navigate('/otp')}/>
     </div>
 }
