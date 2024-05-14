@@ -112,6 +112,6 @@ app.put('/todos',async(req,res)=>{
         return res.status(411).json({msg: 'invalid id'});
     }
 
-    await Todo.updateOne({_id : todoId}, {Completed:true});
-    res.json({msg : 'updated'})
+    const message = await Todo.updateOne({_id : todoId}, {Completed:true});
+    res.json({msg : message})
 })

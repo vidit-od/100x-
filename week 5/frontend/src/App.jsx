@@ -8,19 +8,10 @@ import { Signup } from'./components/signup'
 import { Signin } from './components/signin'
 import { Logout } from './components/logout'
 import { HideContent } from './components/hidecontent'
-function App() {
-  const [todos,setTodos] = useState([]);
-  const [verified,setVerified] = useState(false);
+import {RecoilRoot} from 'recoil';
 
-  useEffect(()=>{
-    fetchTodo();  
-    },[]);
-  
-  const fetchTodo = async ()=>{
-    const res = await fetch("http://localhost:3000/todos")
-    const json = await res.json();
-    setTodos(json);
-  }
+function App() {
+  const [verified,setVerified] = useState(false);
   useEffect(()=>{
     const token = localStorage.getItem('token');
     fetch("http://localhost:3000/verification",{
@@ -41,21 +32,22 @@ function App() {
   const signinHandler = ()=>{
       setVerified(true);
   }
-  const AddHandler = ()=>{
-    fetchTodo();
-  }
-  return (
-    <div className='main'>
-        {!verified && <Signup/>}
-        {!verified && <Signin onSignin = {signinHandler}/>}
-        {verified && <Logout onLogout={logoutHandler} />}
-        {!verified && <HideContent/>}
-        <div className="container">
-          <AddTodo AddHandler={AddHandler}/>
-          <Todolist Alltodos = {todos} />
-        </div>
+  const Main = () => {
+    return <div className='main'>
+      {!verified && <Signup/>}
+      {!verified && <Signin onSignin = {signinHandler}/>}
+      {verified && <Logout onLogout={logoutHandler} />}
+      {!verified && <HideContent/>}
+      <div className="container">
+        <AddTodo/>
+        <Todolist/>
+      </div>
     </div>
-  )
+  };
+
+  return <RecoilRoot>
+        <Main/>
+    </RecoilRoot>
 }
 
 export default App

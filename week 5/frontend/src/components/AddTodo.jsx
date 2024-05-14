@@ -1,8 +1,13 @@
 import { useState } from "react"
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { todosAtom } from "../store/atoms/todo";
+import axios from "axios";
 
-export function AddTodo({AddHandler}){
+export function AddTodo(){
   const [title, setTitle] = useState('');
   const [Desc, setDesc] = useState('');
+  const settodos = useSetRecoilState(todosAtom);
+  
   
   async function Add(){
     const response = await fetch("http://localhost:3000/todos",
@@ -15,9 +20,10 @@ export function AddTodo({AddHandler}){
     })
      const msg = await response.json();
      console.log(msg)
-     if(typeof AddHandler === 'function'){
-      AddHandler();
-    }
+     const res = await axios.get("http://localhost:3000/todos")
+     settodos(res.data);
+     setTitle('');
+     setDesc('');
   }  
   
   return (
