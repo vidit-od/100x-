@@ -4,13 +4,12 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 module.exports =router;
 
-const {User} = require('../db');
+const {User, Bank} = require('../db');
 const {UserSchema, SigninSchema, UpdateSchema} = require('../zod');
 const {middleware} = require('./middleware');
 
 // create new account logic 
 router.post('/signup',async(req,res)=>{
-
     // input validation using zod
     const {success} = UserSchema.safeParse(req.body);
     if(!success) return res.status(404).json({msg:'Invalid input'})
@@ -30,6 +29,13 @@ router.post('/signup',async(req,res)=>{
     // create a token for the user for future auth 
     const userid = newUser._id;
     const token = jwt.sign({userid},process.env.JwtSecret);
+
+    // assign a random balance to the newly created user 
+    const RandomBalance = Math.floor(Math.random()* 10000);
+    const newBank = await Bank.create({
+        userID: newUser._id,
+        balance: RandomBalance
+    })
 
     // return token and a msg stating "user created"
     res.status(200).json({msg: 'user Created', token: token});

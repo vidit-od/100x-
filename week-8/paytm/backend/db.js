@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { object, number } = require('zod');
 
 require('dotenv').config();
 
@@ -32,8 +33,22 @@ const UserSchema = new mongoose.Schema({
     }
 })
 
+const BankSchema = new mongoose.Schema({
+    userID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        require:true,
+    },
+    balance:{
+        type: Number,
+        require: true,
+    }
+})
+
 const User = mongoose.model('User',UserSchema);
+const Bank = mongoose.model('Bank', BankSchema);
 
 module.exports={
-    User
+    User,
+    Bank
 }
