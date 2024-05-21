@@ -73,3 +73,26 @@ router.put('/',middleware,async(req,res)=>{
     if(!user.acknowledged) return res.status(411).json({msg: 'Error !! could not update '});
     res.status(200).json({msg: 'information updated !!'});
 })
+
+// verification
+router.get('/',middleware, async(req,res)=>{
+    res.status(200).json({status:true});
+})
+// use filter to get particular user 
+router.get('/bulk',async(req,res)=>{
+
+    // key value pairs in url are called query , only value is called params 
+    const filter = req.query.filter;
+
+    // using regex to create filter logic
+    const filterUsers = await User.find({
+        $or : [{
+            firstname: { $regex : filter}
+        },{
+            lastname: { $regex : filter}
+        }
+        ]
+    })
+
+    res.status(200).json({users : filterUsers});
+})

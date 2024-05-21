@@ -15,7 +15,7 @@ router.get('/balance',middleware,async(req,res)=>{
     // use user._id to get the bank info 
     const bankinfo = await Bank.findOne({userID:user._id});
 
-    res.status(200).json({balance: bankinfo.balance});
+    res.status(200).json({balance: bankinfo.balance , userinfo: user});
 })  
 
 router.post('/transfer',middleware,async(req,res)=>{
@@ -36,7 +36,11 @@ router.post('/transfer',middleware,async(req,res)=>{
             msg: 'Invalid account'
         })
     }
-
+    if(amount == 0){
+        return res.status(400).json({
+            msg:'Amount cannot be 0'
+        })
+    }
     // get bank info for to and from 
     const fromBank = await Bank.findOne({userID: fromUserId._id}).session(transferSession);
     const toBank = await Bank.findOne({userID: toUserId._id}).session(transferSession);
