@@ -51,6 +51,23 @@ SignupRouter.post('/signin',async(req,res)=>{
     res.status(200).json({msg:Statuscode.code200, token: token});
 })
 
+// verification of JWT token 
+SignupRouter.get('/',async(req,res)=>{
+    const AUTHheader = req.headers.authorization;
+    if(!AUTHheader || !AUTHheader.startsWith('Bearer')) {
+        return res.status(400).json({msg: Statuscode.code400})
+    }
+    const token = AUTHheader.split(' ')[1];
+    try{
+        const decode= jwt.verify(token, process.env.JwtSecret);
+        const user = await User.findOne({username: decode});
+        res.status(200).json({msg: Statuscode.code200,status:true,payload:user});
+    }
+    catch{
+        res.status(403).json({msg: Statuscode.code403,status:false,payload:null});
+    }
+})
+
 // update user info
 SignupRouter.put('/update', middleware, async(req,res)=>{
     const { success } = update.safeParse(req.body);
