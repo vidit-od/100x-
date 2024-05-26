@@ -37,6 +37,7 @@ export function Landing(){
 
     
     const tokenVerification = async()=>{
+        try{
         const token = localStorage.getItem('token');
         await new Promise( r => (setTimeout(r,1500)))
         const response = await axios.get('http://localhost:3000/user/',{
@@ -68,7 +69,10 @@ export function Landing(){
         else{
             navigate('/signin')
         }
-        
+        }
+        catch{
+            navigate('/signin')
+        }   
     }
 
     if( loading){
