@@ -76,7 +76,8 @@ router.put('/',middleware,async(req,res)=>{
 
 // verification
 router.get('/',middleware, async(req,res)=>{
-    res.status(200).json({status:true});
+    const user = await User.findOne({username: req.userid})
+    res.status(200).json({status:true , user:user});
 })
 // use filter to get particular user 
 router.get('/bulk',async(req,res)=>{
