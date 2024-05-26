@@ -118,7 +118,7 @@ export function Dashboard(){
             <div className="bg-white p-5 py-2 rounded-md mt-1 mr-1 w-4/5 transition-width duration-200" ref={BalanceButton}><b>Balance :</b> {balance.toLocaleString()} INR</div>
             <div className="bg-white rounded-md mt-1 mr-1 w-0 flex justify-evenly overflow-hidden transition-width duration-200" ref={options}>
                 <button className="text-red-700 w-1/2 border-r-2 transition-all duration-400 hover:bg-red-700 hover:text-white" onClick={logout}>Logout</button>
-                <button className="text-purple-800 w-1/2 transition-all duration-400 hover:bg-purple-800 hover:text-white">Update</button>
+                <button className="text-purple-800 w-1/2 transition-all duration-400 hover:bg-purple-800 hover:text-white" onClick={()=>navigate('./update')}>Update</button>
             </div>
             <button className="bg-black rounded-md mt-1 text-white p-5 py-2 flex justify-center items-center transition-all duration-200 w-1/5 hover:scale-90" onClick={Expand} ref={SettingButton}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="absolute w-6 h-6">

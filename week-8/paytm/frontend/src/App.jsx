@@ -5,6 +5,7 @@ import { Signup } from './components/signup'
 import { Signin } from './components/signin'
 import { Dashboard } from './components/dashboard'
 import { Send } from './components/send'
+import { Update } from './components/update'
 function App() {
 
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/signup' element= { <Signup/> } />
         <Route path='/signin' element= { <Signin/> } />
         <Route path='/dashboard' element = { <Dashboard/> }/>
+        <Route path='/dashboard/update' element = { <Update/> }/>
         <Route path='/send' element = { <Send/> }/>
       </Routes>
       </BrowserRouter>
