@@ -1,3 +1,3 @@
 # Medium clone : 
 
-link : [Link](https://github.com/vidit-od/Medium-Clone)
+link : [Medium-clone](https://github.com/vidit-od/Medium-Clone)
