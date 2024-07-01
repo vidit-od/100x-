@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    container_name: some-postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_database:/var/lib/postgresql/data
+    networks:
+      - my_network
+    
+  backend:
+    image: backend
+    container_name: backend
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:mysecretpassword@some-postgres:5432/postgres"
+    networks:
+      - my_network
+
+volumes:
+  postgres_database:
+
+networks:
+  my_network:
