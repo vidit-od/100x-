@@ -11,7 +11,6 @@ const LoginRouter = Router();
 LoginRouter.post("", async (req: Request, res: Response)=>{
     const body = req.body;
     const result = LoginSchema.safeParse(body);
-    console.log(body)
 
     if(!result.success) return res.status(ValidationError.code).json({"success" : ValidationError.success, "error" : ValidationError.error})
 
