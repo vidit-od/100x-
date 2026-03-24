@@ -17,7 +17,7 @@ SignupRouter.post("", async (req:Request, res:Response)=>{
         const body = req.body;
         const result = SignupSchema.safeParse(body);
         // input validation
-        if(!result.success) return res.status(ValidationError.code).json({"success" : ValidationError.success, "message" : ValidationError.error})
+        if(!result.success) return res.status(ValidationError.code).json({"success" : ValidationError.success, "error" : ValidationError.error})
         // check db if email already exists
 
         const data = result.data;
@@ -36,7 +36,7 @@ SignupRouter.post("", async (req:Request, res:Response)=>{
             role : data.role
         })
 
-        return res.json({
+        return res.status(201).json({
             "success" : true,
             "data" : {
                 "_id" : user._id,
