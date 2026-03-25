@@ -418,7 +418,7 @@ describe('POST /class', () => {
 });
 
 // ============================================
-// CLASS TESTS - POST /class/:id/add-student
+// CLASS TESTS - POST /class/:id/add-student 8
 // ============================================
 describe('POST /class/:id/add-student', () => {
   it('should add student to class', async () => {

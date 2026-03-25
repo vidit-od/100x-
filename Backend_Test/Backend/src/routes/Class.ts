@@ -4,7 +4,7 @@ import { User } from "../model/User";
 import type { Request, Response, NextFunction } from "express";
 import type { HydratedDocument } from "mongoose";
 import type { IUser } from "../model/User";
-import { ClassSchema } from "../utils/zodSchemas";
+import { addStudentSchema, ClassSchema } from "../utils/zodSchemas";
 import { Class, type IClass } from "../model/Class";
 
 interface AuthRequest extends Request {
@@ -68,6 +68,61 @@ ClassRouter.post("", async(req:AuthRequest, res: Response)=>{
             className : newClass.className,
             teacherId : newClass.teacherId,
             studentIds : newClass.studentIds
+        }
+    })
+})
+
+ClassRouter.post("/:id/add-student", async(req:AuthRequest, res: Response)=>{
+    const ClassId = req.params.id;
+    const user = req.user;
+    if(!user || user.role == "student"){
+        return res.status(403).json({
+            success : false,
+            error : 'Forbidden, teacher access required'
+        })
+    }
+    const OurClass = await Class.findById(ClassId);
+
+    if(!OurClass) return res.status(404).json({
+        success : false,
+        error: 'Class not found'
+    })
+
+    if( OurClass.teacherId.toString() != user._id.toString()) {
+        console.log(OurClass.teacherId, user._id);
+        return res.status(403).json({
+            success : false,
+            error : 'Forbidden, not class teacher'
+        })
+    }
+
+    const body = req.body;
+    const result = addStudentSchema.safeParse(body);
+
+    if (!result.success) return res.status(400).json({
+        success : false,
+        error : "Invalid request schema"
+    })
+
+    const studentId = result.data.studentId;
+    const Student = await User.findById(studentId);
+
+    if(!Student) return res.status(404).json({
+        success : false,
+        error : 'Student not found'
+    })
+
+    if(!OurClass.studentIds.find(s => s.toString() === studentId)){
+        const newClass = await Class.updateOne({_id : OurClass._id},{
+            studentIds : [...OurClass.studentIds, Student._id],
+        })
+        if(newClass) OurClass.studentIds.push(Student._id);
+    }
+
+    return res.status(200).json({
+        success : true,
+        data :{
+            studentIds : OurClass.studentIds,
         }
     })
 })
