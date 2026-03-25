@@ -539,7 +539,7 @@ describe('POST /class/:id/add-student', () => {
 });
 
 // ============================================
-// CLASS TESTS - GET /class/:id
+// CLASS TESTS - GET /class/:id 6
 // ============================================
 describe('GET /class/:id', () => {
   it('should return class details for owning teacher', async () => {
@@ -551,7 +551,7 @@ describe('GET /class/:id', () => {
     await request('POST', `/class/${classId}/add-student`, { studentId }, teacherToken);
 
     const { status, data } = await request('GET', `/class/${classId}`, null, teacherToken);
-
+    console.log(status,data);
     expect(status).toBe(200);
     expect(data.success).toBe(true);
     expect(data.data._id).toBe(classId);

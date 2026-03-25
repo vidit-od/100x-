@@ -127,4 +127,46 @@ ClassRouter.post("/:id/add-student", async(req:AuthRequest, res: Response)=>{
     })
 })
 
+ClassRouter.get("/:id", async(req:AuthRequest, res:Response)=>{
+    const classId = req.params.id;
+    const OurClass = await Class.findById(classId);
+    if(!OurClass) return res.status(404).json({
+        success: false,
+        error: 'Class not found'
+    })
+
+    const user = req.user;
+
+    if(!user
+        || (user.role == "student" && !OurClass.studentIds.find(s => s.toString() === user._id.toString()))
+        || (user.role == "teacher" && user._id.toString() != OurClass.teacherId.toString())){
+        return res.status(403).json({
+            success: false,
+            error: 'Forbidden, not class teacher'
+        })
+    }
+
+
+    const Students = await Promise.all(
+        OurClass.studentIds.map( async(id) =>{
+            const student = await User.findById(id);
+            if(!student) return null
+            return{
+                _id : student._id,
+                name : student.name,
+                email : student.email,
+            }
+        }))
+    const returnList = {
+        _id : OurClass._id,
+        className : OurClass.className,
+        teacherId : OurClass.teacherId,
+        students : Students.filter(Boolean)
+    }
+
+    return res.status(200).json({
+        success : true,
+        data : returnList
+    })
+})
 export default ClassRouter;
