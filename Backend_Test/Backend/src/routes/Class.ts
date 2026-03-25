@@ -89,7 +89,6 @@ ClassRouter.post("/:id/add-student", async(req:AuthRequest, res: Response)=>{
     })
 
     if( OurClass.teacherId.toString() != user._id.toString()) {
-        console.log(OurClass.teacherId, user._id);
         return res.status(403).json({
             success : false,
             error : 'Forbidden, not class teacher'

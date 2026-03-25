@@ -551,7 +551,6 @@ describe('GET /class/:id', () => {
     await request('POST', `/class/${classId}/add-student`, { studentId }, teacherToken);
 
     const { status, data } = await request('GET', `/class/${classId}`, null, teacherToken);
-    console.log(status,data);
     expect(status).toBe(200);
     expect(data.success).toBe(true);
     expect(data.data._id).toBe(classId);
@@ -626,7 +625,7 @@ describe('GET /class/:id', () => {
 });
 
 // ============================================
-// STUDENTS TESTS - GET /students
+// STUDENTS TESTS - GET /students 3
 // ============================================
 describe('GET /students', () => {
   it('should return all students for teacher', async () => {
@@ -636,6 +635,7 @@ describe('GET /students', () => {
 
     const { status, data } = await request('GET', '/students', null, teacherToken);
 
+    console.log(status, data);
     expect(status).toBe(200);
     expect(data.success).toBe(true);
     expect(Array.isArray(data.data)).toBe(true);
@@ -658,7 +658,6 @@ describe('GET /students', () => {
 
   it('should return 401 without token', async () => {
     const { status, data } = await request('GET', '/students');
-
     expect(status).toBe(401);
     expect(data.success).toBe(false);
     expect(data.error).toBe('Unauthorized, token missing or invalid');
