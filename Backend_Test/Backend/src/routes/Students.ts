@@ -42,7 +42,7 @@ StudentsRouter.use("", async(req:AuthRequest, res:Response, next: NextFunction) 
     next();
 })
 
-StudentsRouter.get("", async(req: AuthRequest, res:Response)=>{
+StudentsRouter.get("/myStudents", async(req: AuthRequest, res:Response)=>{
     const teacher = req.user;
     if(!teacher){
         return res.status(403).json({
@@ -107,4 +107,32 @@ StudentsRouter.get("", async(req: AuthRequest, res:Response)=>{
     })
 })
 
+
+StudentsRouter.get("/", async(req: AuthRequest, res: Response)=>{
+    const teacher = req.user;
+    if(!teacher){
+        return res.status(403).json({
+            success : false,
+            error : 'Forbidden, teacher access required'
+        })
+    }
+    const students = await User.find({role: "student"})
+
+    const returnList : {
+        _id : string,
+        name : string,
+        email: string
+    }[] = students.map( ( student) =>{
+        return {
+            _id : student._id.toString(),
+            name : student.name,
+            email : student.email
+        }
+    })
+
+    return res.status(200).json({
+        success : true,
+        data : returnList,
+    })
+})
 export default StudentsRouter;
