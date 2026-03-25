@@ -366,7 +366,7 @@ describe('GET /auth/me', () => {
 });
 
 // ============================================
-// CLASS TESTS - POST /class
+// CLASS TESTS - POST /class 4
 // ============================================
 describe('POST /class', () => {
   it('should create a new class as teacher', async () => {
